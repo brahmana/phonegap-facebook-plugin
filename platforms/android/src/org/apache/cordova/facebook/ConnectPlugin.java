@@ -58,6 +58,7 @@ public class ConnectPlugin extends CordovaPlugin {
         }
     };
     private final String TAG = "ConnectPlugin";
+    private final String METAG = "PRESTO-DEBUG";
 
     private AppEventsLogger logger;
     private String applicationId = null;
@@ -73,6 +74,7 @@ public class ConnectPlugin extends CordovaPlugin {
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        Log.i(METAG, "Facebook plugin initialized");
         //Initialize UiLifecycleHelper
         uiHelper = new UiLifecycleHelper(cordova.getActivity(), null);
 
@@ -111,10 +113,13 @@ public class ConnectPlugin extends CordovaPlugin {
 
     @Override
     public void onResume(boolean multitasking) {
+        Log.i(METAG, "Facebook plugin onResume called");
         super.onResume(multitasking);
         uiHelper.onResume();
+        Log.i(METAG, "Facebook plugin sending app install to FB");
         // Developers can observe how frequently users activate their app by logging an app activation event.
         AppEventsLogger.activateApp(cordova.getActivity());
+        Log.i(METAG, "Facebook plugin sent app install to FB");
     }
 
     protected void onSaveInstanceState(Bundle outState) {
